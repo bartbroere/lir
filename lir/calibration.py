@@ -223,17 +223,21 @@ class IsotonicCalibrator(BaseEstimator, TransformerMixin):
             add_misleading: int: add misleading data points on both sides (default: 0)
         """
         if add_one:
-            warnings.warn('parameter `add_one` is deprecated; use `add_misleading` instead')
+            warnings.warn('parameter `add_one` is deprecated; use `add_misleading=1` instead')
 
         self.add_misleading = (1 if add_one else 0) + add_misleading
         self._ir = IsotonicRegression()
 
     def fit(self, X, y, **fit_params):
         # prevent extreme LRs
-        if 'add_one' in fit_params:
-            warnings.warn('parameter `add_one` is no longer supported; use `add_misleading` instead')
+        if 'add_misleading' in fit_params:
+            n_misleading = fit_params['add_misleading']
+        elif 'add_one' in fit_params:
+            warnings.warn('parameter `add_one` is deprecated; use `add_misleading=1` instead')
+            n_misleading = 1 if fit_params['add_one'] else 0
+        else:
+            n_misleading = self.add_misleading
 
-        n_misleading = fit_params['add_misleading'] if 'add_misleading' in fit_params else self.add_misleading
         if n_misleading > 0:
             X = np.concatenate([X, np.ones(n_misleading) * (X.max()+1), np.ones(n_misleading) * (X.min()-1)])
             y = np.concatenate([y, np.zeros(n_misleading), np.ones(n_misleading)])
