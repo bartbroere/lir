@@ -2,7 +2,7 @@ import os
 from setuptools import setup, find_packages
 
 package_dir = os.path.dirname(__file__)
-requirements_file_path = os.path.join(os.path.dirname(__file__), "requirements.txt")
+requirements_file_path = os.path.join(package_dir, "requirements.txt")
 with open(requirements_file_path, "r") as f:
     packages = [str(f) for f in f.readlines()]
 with open("readme.md") as f:
