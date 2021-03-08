@@ -14,7 +14,7 @@ with open('setup.py') as f:
                     z = str(int(z) + 1)
                     bumped_version = keyword.value.value = f'{x}.{y}.{z}'
     bumped_setup = black.format_str(ast.unparse(parsed_setup), mode=black.FileMode())
-    print(f'bumped from {original_version} to {bumped_version}')
+    print(bumped_version)
 
 with open('setup.py', 'w') as w:
     w.write(bumped_setup)
