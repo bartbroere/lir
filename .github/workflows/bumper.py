@@ -10,9 +10,9 @@ with open('setup.py') as f:
                 if keyword.arg == 'version':
                     original_version = keyword.value.value
                     # TODO use a proper version lib later
-                    x, y, z = keyword.value.value.split('.')
-                    z = str(int(z) + 1)
-                    bumped_version = keyword.value.value = f'{x}.{y}.{z}'
+                    major, minor, patch = keyword.value.value.split('.')
+                    patch = str(int(patch) + 1)
+                    bumped_version = keyword.value.value = f'{major}.{minor}.{patch}'
     bumped_setup = black.format_str(ast.unparse(parsed_setup), mode=black.FileMode())
     print(bumped_version)
 
