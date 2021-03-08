@@ -6,7 +6,7 @@ requirements_file_path = os.path.join(os.path.dirname(__file__), "requirements.t
 with open(requirements_file_path, "r") as f:
     packages = [str(f) for f in f.readlines()]
 with open("readme.md") as f:
-    long_description = f.read()
+    long_description = f.read() 
 setup(
     name="lir",
     version="0.0.6",
