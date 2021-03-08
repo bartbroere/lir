@@ -37,6 +37,7 @@ jobs:
         pytest
     - name: Bump version number
       run: |
+        python -m pip install black
         python .github/workflows/bumper.py
     - name: Commit files
       run: |
