@@ -61,3 +61,14 @@ jobs:
           Automated incremental release
         draft: false
         prerelease: false
+    - name: Install publishing dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: fbda
+        TWINE_PASSWORD: ${{ secrets.PYPI_FBDA_PASSWORD }}
+      run: |
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
