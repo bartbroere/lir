@@ -37,4 +37,4 @@ jobs:
         pytest
     - name: Bump version number
       run: |
-        git show
+        bash -c 'git show | grep version'
