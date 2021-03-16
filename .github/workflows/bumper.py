@@ -1,3 +1,17 @@
+"""
+This utility is called by Github Actions. It bumps the version number, unless the
+patch part of the major.minor.patch version is 0. This would suggest a manual
+major or minor release, in which case we probably don't want automatic patch 
+increments.
+
+It's expected that setup.py contains a call to setup, where one of the arguments
+is the version number. This script rewrites setup.py to have a bumped version number.
+Other Github Action workflows after it could commit this rewritten setup.py back to
+the repository automatically.
+
+The output of this script is always the bumped version number, which could be put
+into an environment variable for later use in the workflow.
+"""
 import ast
 
 import black
