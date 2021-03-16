@@ -46,7 +46,7 @@ jobs:
         git config --local user.email "fbda@nfi.nl"
         git config --local user.name "Version bumper"
         git add setup.py
-        git commit -m "Bump version to ${{ env.NEW_VERSION }}" || echo "Nothing changed in setup.py"
+        git commit -m "Bump version to ${{ env.NEW_VERSION }}" || echo "Committing the version bump failed"
     - name: Push changes
       if: github.ref == 'refs/heads/master'
       uses: ad-m/github-push-action@master
