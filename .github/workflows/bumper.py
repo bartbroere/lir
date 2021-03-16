@@ -9,9 +9,11 @@ with open("setup.py") as f:
             for keyword in element.value.keywords:
                 if keyword.arg == "version":
                     original_version = keyword.value.value
-                    # TODO use a proper version lib later
                     major, minor, patch = keyword.value.value.split(".")
-                    patch = str(int(patch) + 1)
+                    if int(patch) != 0:
+                        # If the last digit is 0, it suggests that a major or minor
+                        # release was done manually. In that case, don't alter anything.
+                        patch = str(int(patch) + 1)
                     bumped_version = keyword.value.value = f"{major}.{minor}.{patch}"
     bumped_setup = black.format_str(ast.unparse(parsed_setup), mode=black.FileMode())
     print(bumped_version)
